@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/widget/app_scaffold.dart';
-import '../../../../../core/widget/navigation_bar/bar.dart';
-import '../../../../../core/widget/navigation_bar/item.dart';
+// The new, self-contained navigation bar
+import '../../../../../core/widget/navigation_bar.dart';
 import '../bloc/dash_board_bloc.dart';
 
 class DashBoardScreen extends StatelessWidget {
@@ -20,11 +20,11 @@ class DashBoardScreen extends StatelessWidget {
             bodyLandScape: DashBoardBody(),
             bodyPortrait: DashBoardBody(),
             bottomNavigationBar: ConvexAppBar(
-              style: TabStyle.fixed,
-              items: [
-                TabItem(icon: Icons.list),
-                TabItem(icon: Icons.calendar_today),
-                TabItem(icon: Icons.assessment),
+              // The 'style' property is no longer needed as it defaults to a fixed style.
+              items: const [
+                TabItem(icon: Icons.list, title: 'List'),
+                TabItem(icon: Icons.calendar_today, title: 'Calendar'),
+                TabItem(icon: Icons.assessment, title: 'Assessment'),
               ],
               initialActiveIndex: 1,
               onTap: (int index) => context
