@@ -1,0 +1,26 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "name": "TOYOTA-COROLLA",
+      "color": "RED",
+      "price": "5000000000000",
+      "frame-no": "AJ-00.012",
+      "date": "2025-12-26"
+    },
+    {
+      "name": "HONDA-CIVIC",
+      "color": "BLUE",
+      "price": "740020000000",
+      "frame-no": "AJ-00.063",
+      "date": "2026-09-21"
+    },
+    {
+      "name": "NISSAN-LEAF",
+      "color": "BLACK",
+      "price": "",
+      "frame-no": "AJ-00.014",
+      "date": "2026-09-21"
+    }
+  ]
+}

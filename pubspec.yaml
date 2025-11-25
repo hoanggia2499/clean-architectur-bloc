@@ -1,0 +1,37 @@
+name: base_project
+description: "A base Flutter project."
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  flutter_bloc: ^8.1.3
+  go_router: ^12.1.1
+  dartz: ^0.10.1
+  get_it: ^7.6.4
+  injectable: ^2.3.2
+  dio: ^5.3.3
+  flutter_secure_storage: ^9.0.0
+  equatable: ^2.0.5
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^3.0.1
+  build_runner: ^2.4.6
+  injectable_generator: ^2.4.1
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/mock/
