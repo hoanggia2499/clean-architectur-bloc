@@ -1,8 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:base_project/core/error.dart';
 import 'package:base_project/features/auth/domain/usecases/login_usecase.dart';
-import 'package:base_project/features/auth/presentation/bloc/auth_event.dart';
-import 'package:base_project/features/auth/presentation/bloc/auth_state.dart';
+import 'package:equatable/equatable.dart';
+import 'package:base_project/features/auth/domain/entities/auth_response_entity.dart';
+part 'auth_state.dart';
+part 'auth_event.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase loginUseCase;

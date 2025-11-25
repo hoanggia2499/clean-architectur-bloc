@@ -1,13 +1,14 @@
+import 'package:base_project/core/navigation/path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:base_project/features/auth/presentation/bloc/auth_bloc.dart';
-import 'package:base_project/features/auth/presentation/bloc/auth_event.dart';
-import 'package:base_project/features/auth/presentation/bloc/auth_state.dart';
+import '../bloc/auth_bloc.dart';
 
 class LoginPage extends StatelessWidget {
-  final TextEditingController _usernameController = TextEditingController(text: "emilys");
-  final TextEditingController _passwordController = TextEditingController(text: "emilyspass");
+  final TextEditingController _usernameController =
+      TextEditingController(text: "emilys");
+  final TextEditingController _passwordController =
+      TextEditingController(text: "emilyspass");
 
   LoginPage({super.key});
 
@@ -28,7 +29,7 @@ class LoginPage extends StatelessWidget {
             );
           } else if (state is AuthSuccess) {
             // Navigate to the car list screen and pass the list of cars.
-            context.go('/cars', extra: state.authResponse);
+            context.go(PathRoute.dashboard);
           }
         },
         child: Padding(

@@ -15,7 +15,6 @@ class AuthResponseModel extends AuthResponseEntity {
 
   factory AuthResponseModel.fromJson(Map<String, dynamic> json) {
     return AuthResponseModel(
-      // The 'data' wrapper is now handled by DioClient, so we parse from the root.
       id: json['id'] as int,
       firstName: json['firstName'] as String,
       email: json['email'] as String,

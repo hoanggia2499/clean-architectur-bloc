@@ -5,6 +5,10 @@ class DashBoardBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return LayoutBuilder(
+      builder: (context, constraint) {
+        return Container();
+      },
+    );
   }
 }
