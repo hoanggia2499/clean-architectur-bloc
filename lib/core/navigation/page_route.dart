@@ -3,6 +3,8 @@ import 'package:base_project/features/assessment/presentation/assessment_screen/
 import 'package:base_project/features/assessment/presentation/bloc/assessment_bloc.dart';
 import 'package:base_project/features/calendar/presentation/bloc/calendar_bloc.dart';
 import 'package:base_project/features/dash_board/presentation/dash_board_screen/ui/dash_board_screen.dart';
+import 'package:base_project/features/todo/presentation/bloc/todo_bloc.dart';
+import 'package:base_project/features/todo/presentation/todo_screen/ui/todo_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:base_project/features/auth/presentation/pages/login_page.dart';
@@ -11,8 +13,6 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../features/calendar/presentation/calendar_screen/ui/calendar_screen.dart';
 import '../../features/dash_board/presentation/bloc/dash_board_bloc.dart';
-import '../../features/list/presentation/bloc/_bloc.dart';
-import '../../features/list/presentation/list_screen/ui/list_screen.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: PathRoute.dashboard,
@@ -31,19 +31,25 @@ final GoRouter router = GoRouter(
       path: PathRoute.dashboard,
       name: 'dashboard',
       builder: (BuildContext context, GoRouterState state) {
-        return BlocProvider(
-          create: (_) => sl<DashBoardBloc>(),
-          child: DashBoardScreen(),
+        // Provide all necessary BLoCs for the screens within the dashboard here.
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (_) => sl<DashBoardBloc>()),
+            BlocProvider(create: (_) => sl<TodoBloc>()),
+            BlocProvider(create: (_) => sl<CalendarBloc>()),
+            BlocProvider(create: (_) => sl<AssessmentBloc>()),
+          ],
+          child: const DashBoardScreen(),
         );
       },
     ),
     GoRoute(
-      path: PathRoute.list,
-      name: 'list',
+      path: PathRoute.todo,
+      name: 'todo',
       builder: (BuildContext context, GoRouterState state) {
         return BlocProvider(
-          create: (_) => sl<ListBloc>(),
-          child: ListScreen(),
+          create: (_) => sl<TodoBloc>(),
+          child: const TodoScreen(),
         );
       },
     ),
@@ -53,7 +59,7 @@ final GoRouter router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return BlocProvider(
           create: (_) => sl<CalendarBloc>(),
-          child: CalendarScreen(),
+          child: const CalendarScreen(),
         );
       },
     ),
@@ -63,7 +69,7 @@ final GoRouter router = GoRouter(
       builder: (BuildContext context, GoRouterState state) {
         return BlocProvider(
           create: (_) => sl<AssessmentBloc>(),
-          child: AssessmentScreen(),
+          child: const AssessmentScreen(),
         );
       },
     ),

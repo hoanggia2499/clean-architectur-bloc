@@ -1,4 +1,5 @@
 import 'package:base_project/features/assessment/presentation/bloc/assessment_bloc.dart';
+import 'package:base_project/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -16,7 +17,6 @@ import 'package:base_project/features/auth/domain/usecases/login_usecase.dart';
 import '../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../features/calendar/presentation/bloc/calendar_bloc.dart';
 import '../../features/dash_board/presentation/bloc/dash_board_bloc.dart';
-import '../../features/list/presentation/bloc/_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -27,7 +27,7 @@ void init() {
   // Blocs
   sl.registerFactory(() => AuthBloc(loginUseCase: sl()));
   sl.registerFactory(() => DashBoardBloc());
-  sl.registerFactory(() => ListBloc());
+  sl.registerFactory(() => TodoBloc());
   sl.registerFactory(() => CalendarBloc());
   sl.registerFactory(() => AssessmentBloc());
 
