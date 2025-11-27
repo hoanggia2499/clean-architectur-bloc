@@ -1,8 +1,11 @@
 part of 'assessment_bloc.dart';
-abstract class AssessmentEvent {}
 
+abstract class AssessmentEvent extends Equatable {
+  const AssessmentEvent();
 
-class FirstEvent extends AssessmentEvent{
-  int exam;
-  FirstEvent({required this.exam});
+  @override
+  List<Object> get props => [];
 }
+
+/// Event triggered when the Assessment page is first displayed or re-selected.
+class AssessmentPageInitialized extends AssessmentEvent {}

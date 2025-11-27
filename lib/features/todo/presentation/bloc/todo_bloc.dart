@@ -6,13 +6,15 @@ part 'todo_event.dart';
 part 'todo_state.dart';
 
 class TodoBloc extends Bloc<TodoEvent, TodoState> {
-
   TodoBloc() : super(TodoInitial()) {
-    on<FirstEvent>(_onTabChangeEvent);
+    on<TodoPageInitialized>(_onPageInitialized);
   }
 
-  FutureOr<void> _onTabChangeEvent(
-      FirstEvent event, Emitter<TodoState> emit) {
-    print("${event.exam}");
+  FutureOr<void> _onPageInitialized(
+      TodoPageInitialized event, Emitter<TodoState> emit) {
+    // This is where you would typically fetch data for the todo list.
+    // For now, we just print a message as requested.
+   emit(TodoInitial());
+    // You could emit a loading state here and then a loaded/error state.
   }
 }

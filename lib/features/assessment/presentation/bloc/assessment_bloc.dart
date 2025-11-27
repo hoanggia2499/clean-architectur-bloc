@@ -8,11 +8,11 @@ part 'assessment_state.dart';
 class AssessmentBloc extends Bloc<AssessmentEvent, AssessmentState> {
 
   AssessmentBloc() : super(AssessmentInitial()) {
-    on<FirstEvent>(_onTabChangeEvent);
+    on<AssessmentPageInitialized>(_onTabChangeEvent);
   }
 
   FutureOr<void> _onTabChangeEvent(
-      FirstEvent event, Emitter<AssessmentState> emit) {
-    print("${event.exam}");
+      AssessmentPageInitialized event, Emitter<AssessmentState> emit) {
+    print("AssessmentBloc");
   }
 }

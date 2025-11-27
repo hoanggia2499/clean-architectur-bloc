@@ -1,8 +1,11 @@
 part of 'calendar_bloc.dart';
-abstract class CalendarEvent {}
 
+abstract class CalendarEvent extends Equatable {
+  const CalendarEvent();
 
-class FirstEvent extends CalendarEvent{
-  int exam;
-  FirstEvent({required this.exam});
+  @override
+  List<Object> get props => [];
 }
+
+/// Event triggered when the Calendar page is first displayed or re-selected.
+class CalendarPageInitialized extends CalendarEvent {}

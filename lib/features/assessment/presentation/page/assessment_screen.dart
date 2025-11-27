@@ -1,7 +1,7 @@
-import 'package:base_project/features/assessment/presentation/assessment_screen/ui/widgets/assessment_body.dart';
+import 'package:base_project/features/assessment/presentation/page/widgets/assessment_body.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/widget/app_scaffold.dart';
+import '../../../../core/widget/app_scaffold.dart';
 
 class AssessmentScreen extends StatelessWidget {
   const AssessmentScreen({super.key});

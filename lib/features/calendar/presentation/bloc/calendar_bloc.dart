@@ -8,11 +8,11 @@ part 'calendar_state.dart';
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
 
   CalendarBloc() : super(CalendarInitial()) {
-    on<FirstEvent>(_onTabChangeEvent);
+    on<CalendarPageInitialized>(_onTabChangeEvent);
   }
 
   FutureOr<void> _onTabChangeEvent(
-      FirstEvent event, Emitter<CalendarState> emit) {
-    print("${event.exam}");
+      CalendarPageInitialized event, Emitter<CalendarState> emit) {
+    print("CalendarBloc");
   }
 }

@@ -8,9 +8,12 @@ class TodoBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<TodoBloc, TodoState>(
-      listener: (context, state) {},
-      child:
-      BlocBuilder<TodoBloc, TodoState>(builder: (context, state) {
+      listener: (context, state) {
+        if (state is TodoInitial) {
+          print("TodoInitial");
+        }
+      },
+      child: BlocBuilder<TodoBloc, TodoState>(builder: (context, state) {
         return Center(
           child: Text("TODO"),
         );

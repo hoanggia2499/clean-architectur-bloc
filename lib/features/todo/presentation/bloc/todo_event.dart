@@ -1,8 +1,11 @@
 part of 'todo_bloc.dart';
-abstract class TodoEvent {}
 
+abstract class TodoEvent extends Equatable {
+  const TodoEvent();
 
-class FirstEvent extends TodoEvent{
-  int exam;
-  FirstEvent({required this.exam});
+  @override
+  List<Object> get props => [];
 }
+
+/// Event triggered when the Todo page is first displayed or re-selected.
+class TodoPageInitialized extends TodoEvent {}

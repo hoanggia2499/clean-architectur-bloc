@@ -8,7 +8,11 @@ class CalendarBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<CalendarBloc, CalendarState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        if (state is CalendarInitial) {
+          print("TodoInitial");
+        }
+      },
       child:
           BlocBuilder<CalendarBloc, CalendarState>(builder: (context, state) {
         return Center(

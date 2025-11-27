@@ -1,7 +1,7 @@
-import 'package:base_project/features/calendar/presentation/calendar_screen/ui/widgets/calendar_body.dart';
+import 'package:base_project/features/calendar/presentation/page/widgets/calendar_body.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/widget/app_scaffold.dart';
+import '../../../../core/widget/app_scaffold.dart';
 
 class CalendarScreen extends StatelessWidget {
   const CalendarScreen({super.key});
