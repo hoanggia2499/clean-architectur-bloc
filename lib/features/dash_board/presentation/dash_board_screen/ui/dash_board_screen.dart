@@ -19,38 +19,29 @@ class DashBoardScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // The BlocBuilder now controls the entire screen's state, including
-    // the active tab and the visible page.
-    int currentIndex = 0;
-    return BlocListener<DashBoardBloc, DashBoardState>(
-      listener: (context, state) {
-        if (state is IndexState) {
-          currentIndex = state.index;
-        }
+    // The BlocBuilder now controls the entire screen's state. The anti-pattern
+    // of using BlocListener + a local variable has been removed.
+    return BlocBuilder<DashBoardBloc, DashBoardState>(
+      builder: (context, state) {
+        return Scaffold(
+          body: IndexedStack(
+            // The BLoC state directly controls which page is visible.
+            index: state.tabIndex,
+            children: _pages,
+          ),
+          bottomNavigationBar: ConvexAppBar(
+            items: const [
+              TabItem(icon: Icons.add_to_drive_outlined, title: 'Todo'),
+              TabItem(icon: Icons.calendar_today, title: 'Calendar'),
+              TabItem(icon: Icons.assessment, title: 'Assessment'),
+            ],
+            // The BLoC state is the single source of truth for the active index.
+            activeIndex: state.tabIndex,
+            onTap: (int index) =>
+                context.read<DashBoardBloc>().add(TabChangeEvent(index: index)),
+          ),
+        );
       },
-      child: BlocBuilder<DashBoardBloc, DashBoardState>(
-        builder: (context, state) {
-          return Scaffold(
-            body: IndexedStack(
-              index:
-                  currentIndex, // The BLoC state directly controls the visible page.
-              children: _pages,
-            ),
-            bottomNavigationBar: ConvexAppBar(
-              items: const [
-                TabItem(icon: Icons.add_to_drive_outlined, title: 'Todo'),
-                TabItem(icon: Icons.calendar_today, title: 'Calendar'),
-                TabItem(icon: Icons.assessment, title: 'Assessment'),
-              ],
-              // The BLoC state is the single source of truth for the active index.
-              activeIndex: currentIndex,
-              onTap: (int index) => context
-                  .read<DashBoardBloc>()
-                  .add(TabChangeEvent(index: index)),
-            ),
-          );
-        },
-      ),
     );
   }
 }
