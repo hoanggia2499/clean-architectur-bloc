@@ -1,4 +1,7 @@
 class PathRoute{
   static const String login = "/login";
   static const String dashboard = "/dashboard";
+  static const String list = "/list";
+  static const String calendar = "/calendar";
+  static const String assessment = "/assessment";
 }

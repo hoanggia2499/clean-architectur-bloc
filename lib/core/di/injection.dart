@@ -1,4 +1,4 @@
-import 'package:base_project/features/dash_board/presentation/dash_board_screen/bloc/dash_board_bloc.dart';
+import 'package:base_project/features/assessment/presentation/bloc/assessment_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -14,6 +14,9 @@ import 'package:base_project/features/auth/domain/repositories/auth_repository.d
 import 'package:base_project/features/auth/domain/usecases/login_usecase.dart';
 
 import '../../features/auth/presentation/bloc/auth_bloc.dart';
+import '../../features/calendar/presentation/bloc/calendar_bloc.dart';
+import '../../features/dash_board/presentation/bloc/dash_board_bloc.dart';
+import '../../features/list/presentation/bloc/_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -24,6 +27,9 @@ void init() {
   // Blocs
   sl.registerFactory(() => AuthBloc(loginUseCase: sl()));
   sl.registerFactory(() => DashBoardBloc());
+  sl.registerFactory(() => ListBloc());
+  sl.registerFactory(() => CalendarBloc());
+  sl.registerFactory(() => AssessmentBloc());
 
   // Use cases
   sl.registerLazySingleton(() => LoginUseCase(sl()));
