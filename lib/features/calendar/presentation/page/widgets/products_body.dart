@@ -1,24 +1,24 @@
-import 'package:base_project/features/calendar/presentation/bloc/calendar_bloc.dart';
+import 'package:base_project/features/calendar/presentation/bloc/products_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CalendarBody extends StatelessWidget {
-  const CalendarBody({super.key});
+class ProductsBody extends StatelessWidget {
+  const ProductsBody({super.key});
 
   @override
   Widget build(BuildContext context) {
     // Use BlocBuilder as the single source of truth for building the UI.
-    return BlocBuilder<CalendarBloc, CalendarState>(
+    return BlocBuilder<ProductsBloc, ProductsState>(
       builder: (context, state) {
         // While loading, show a central progress indicator.
-        if (state is CalendarLoading || state is CalendarInitial) {
+        if (state is ProductsLoading || state is ProductsInitial) {
           return const Center(
             child: CircularProgressIndicator(),
           );
         }
 
         // If there's an error, display it clearly.
-        if (state is CalendarFailure) {
+        if (state is ProductsFailure) {
           return Center(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
@@ -32,8 +32,8 @@ class CalendarBody extends StatelessWidget {
         }
 
         // On success, display the list of products.
-        if (state is CalendarSuccess) {
-          final products = state.productListEntity.products;
+        if (state is ProductsSuccess) {
+          final products = state.products;
 
           if (products.isEmpty) {
             return const Center(child: Text('No products found.'));

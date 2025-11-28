@@ -1,12 +1,12 @@
 import 'package:base_project/features/assessment/presentation/bloc/assessment_bloc.dart';
-import 'package:base_project/features/calendar/presentation/bloc/calendar_bloc.dart';
+import 'package:base_project/features/calendar/presentation/bloc/products_bloc.dart';
 import 'package:base_project/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/widget/navigation_bar.dart';
 import '../../../assessment/presentation/page/assessment_screen.dart';
-import '../../../calendar/presentation/page/calendar_screen.dart';
+import '../../../calendar/presentation/page/products_screen.dart';
 import '../../../todo/presentation/page/todo_screen.dart';
 import '../bloc/dash_board_bloc.dart';
 
@@ -15,7 +15,7 @@ class DashBoardScreen extends StatelessWidget {
 
   final List<Widget> _pages = const [
     TodoScreen(),
-    CalendarScreen(),
+    ProductsScreen(),
     AssessmentScreen(),
   ];
 
@@ -34,7 +34,7 @@ class DashBoardScreen extends StatelessWidget {
             context.read<TodoBloc>().add(TodoPageInitialized());
             break;
           case 1:
-            context.read<CalendarBloc>().add(CalendarPageInitialized());
+            context.read<ProductsBloc>().add(ProductsPageInitialized());
             break;
           case 2:
             context.read<AssessmentBloc>().add(AssessmentPageInitialized());

@@ -1,7 +1,7 @@
 import 'package:base_project/features/assessment/presentation/bloc/assessment_bloc.dart';
-import 'package:base_project/features/calendar/data/datasources/calendar_remote_data_source.dart';
-import 'package:base_project/features/calendar/data/repositories/calendar_repository_impl.dart';
-import 'package:base_project/features/calendar/domain/repositories/calendar_repository.dart';
+import 'package:base_project/features/calendar/data/datasources/products_remote_data_source.dart';
+import 'package:base_project/features/calendar/data/repositories/products_repository_impl.dart';
+import 'package:base_project/features/calendar/domain/repositories/products_repository.dart';
 import 'package:base_project/features/calendar/domain/usecases/get_products_usecase.dart';
 import 'package:base_project/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -19,7 +19,7 @@ import 'package:base_project/features/auth/domain/repositories/auth_repository.d
 import 'package:base_project/features/auth/domain/usecases/login_usecase.dart';
 
 import '../../features/auth/presentation/bloc/auth_bloc.dart';
-import '../../features/calendar/presentation/bloc/calendar_bloc.dart';
+import '../../features/calendar/presentation/bloc/products_bloc.dart';
 import '../../features/dash_board/presentation/bloc/dash_board_bloc.dart';
 
 final sl = GetIt.instance;
@@ -32,7 +32,7 @@ void init() {
   sl.registerFactory(() => AuthBloc(sl()));
   sl.registerFactory(() => DashBoardBloc());
   sl.registerFactory(() => TodoBloc());
-  sl.registerFactory(() => CalendarBloc(sl()));
+  sl.registerFactory(() => ProductsBloc(sl()));
   sl.registerFactory(() => AssessmentBloc());
 
   // Use cases
