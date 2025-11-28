@@ -11,6 +11,14 @@ class CalendarInitial extends CalendarState {}
 
 class CalendarLoading extends CalendarState {}
 
+class CalendarSuccess extends CalendarState {
+  final ProductListEntity productListEntity;
+  const CalendarSuccess({required this.productListEntity});
+
+  @override
+  List<Object> get props => [productListEntity];
+}
+
 
 class CalendarFailure extends CalendarState {
   final String message;

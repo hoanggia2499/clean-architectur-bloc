@@ -9,9 +9,7 @@ class TodoBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<TodoBloc, TodoState>(
       listener: (context, state) {
-        if (state is TodoInitial) {
-          print("TodoInitial");
-        }
+        if (state is TodoInitial) {}
       },
       child: BlocBuilder<TodoBloc, TodoState>(builder: (context, state) {
         return Center(

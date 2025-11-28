@@ -9,3 +9,7 @@ abstract class CalendarEvent extends Equatable {
 
 /// Event triggered when the Calendar page is first displayed or re-selected.
 class CalendarPageInitialized extends CalendarEvent {}
+
+class AllProductsReceived extends CalendarEvent {
+
+}

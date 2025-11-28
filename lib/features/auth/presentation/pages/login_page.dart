@@ -27,7 +27,9 @@ class LoginPage extends StatelessWidget {
                 backgroundColor: Colors.red,
               ),
             );
-          } else if (state is AuthSuccess) {
+          }
+
+          if (state is AuthSuccess) {
             // Navigate to the car list screen and pass the list of cars.
             context.go(PathRoute.dashboard);
           }

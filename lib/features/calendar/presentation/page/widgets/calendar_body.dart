@@ -10,13 +10,13 @@ class CalendarBody extends StatelessWidget {
     return BlocListener<CalendarBloc, CalendarState>(
       listener: (context, state) {
         if (state is CalendarInitial) {
-          print("TodoInitial");
+          print("CategoryInitial");
         }
       },
       child:
           BlocBuilder<CalendarBloc, CalendarState>(builder: (context, state) {
         return Center(
-          child: Text("CALENDAR"),
+          child: Text("CATEGORY"),
         );
       }),
     );

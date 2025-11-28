@@ -52,7 +52,7 @@ class DashBoardScreen extends StatelessWidget {
             bottomNavigationBar: ConvexAppBar(
               items: const [
                 TabItem(icon: Icons.add_to_drive_outlined, title: 'Todo'),
-                TabItem(icon: Icons.calendar_today, title: 'Calendar'),
+                TabItem(icon: Icons.category, title: 'Category'),
                 TabItem(icon: Icons.assessment, title: 'Assessment'),
               ],
               activeIndex: state.tabIndex,

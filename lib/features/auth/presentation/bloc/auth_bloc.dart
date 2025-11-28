@@ -9,10 +9,11 @@ part 'auth_event.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final LoginUseCase loginUseCase;
 
-  AuthBloc({required this.loginUseCase}) : super(AuthInitial()) {
+  AuthBloc(this.loginUseCase) : super(AuthInitial()) {
     on<LoginEvent>((event, emit) async {
       emit(AuthLoading());
-      final result = await loginUseCase(LoginParams(username: event.username, password: event.password));
+      final result = await loginUseCase(
+          LoginParams(username: event.username, password: event.password));
       result.fold(
         (failure) {
           if (failure is ServerFailure) {

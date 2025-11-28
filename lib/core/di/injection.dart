@@ -1,4 +1,8 @@
 import 'package:base_project/features/assessment/presentation/bloc/assessment_bloc.dart';
+import 'package:base_project/features/calendar/data/datasources/calendar_remote_data_source.dart';
+import 'package:base_project/features/calendar/data/repositories/calendar_repository_impl.dart';
+import 'package:base_project/features/calendar/domain/repositories/calendar_repository.dart';
+import 'package:base_project/features/calendar/domain/usecases/get_products_usecase.dart';
 import 'package:base_project/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
@@ -25,23 +29,30 @@ void init() {
   // Features - Auth
   // =======================================================================
   // Blocs
-  sl.registerFactory(() => AuthBloc(loginUseCase: sl()));
+  sl.registerFactory(() => AuthBloc(sl()));
   sl.registerFactory(() => DashBoardBloc());
   sl.registerFactory(() => TodoBloc());
-  sl.registerFactory(() => CalendarBloc());
+  sl.registerFactory(() => CalendarBloc(sl()));
   sl.registerFactory(() => AssessmentBloc());
 
   // Use cases
   sl.registerLazySingleton(() => LoginUseCase(sl()));
+  sl.registerLazySingleton(() => GetProductsUseCase(sl()));
 
   // Repositories
   sl.registerLazySingleton<AuthRepository>(
     () => AuthRepositoryImpl(remoteDataSource: sl(), tokenStorage: sl()),
   );
+  sl.registerLazySingleton<CalendarRepository>(
+    () => CalendarRepositoryImpl(remoteDataSource: sl()),
+  );
 
   // Data sources
   sl.registerLazySingleton<AuthRemoteDataSource>(
     () => AuthRemoteDataSourceImpl(sl()),
+  );
+  sl.registerLazySingleton<CalendarRemoteDataSource>(
+    () => CalendarRemoteDataSourceImpl(sl()),
   );
 
   // =======================================================================
