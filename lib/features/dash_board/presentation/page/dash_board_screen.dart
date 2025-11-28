@@ -27,29 +27,11 @@ class DashBoardScreen extends StatelessWidget {
       // re-triggering on other state changes.
       listenWhen: (previous, current) => previous.tabIndex != current.tabIndex,
       listener: (context, state) {
-        // When the tab changes, add an initialization event to the BLoC
-        // of the newly selected screen.
-        if (state is DashBoardInitial) {
-          print("DashBoardInitial");
-        }
-        switch (state.tabIndex) {
-          case 0:
-            context.read<TodoBloc>().add(TodoPageInitialized());
-            break;
-          case 1:
-            context.read<ProductsBloc>().add(ProductsRefreshed());
-            break;
-          case 2:
-            context.read<AssessmentBloc>().add(AssessmentPageInitialized());
-            break;
-        }
+
       },
       // The BlocBuilder remains the single source of truth for the UI.
       child: BlocBuilder<DashBoardBloc, DashBoardState>(
         builder: (context, state) {
-          if (state is DashBoardInitial) {
-            context.read<ProductsBloc>().add(ProductsRefreshed());
-          }
           return Scaffold(
             body: IndexedStack(
               index: state.tabIndex,

@@ -16,8 +16,7 @@ class _ProductsBodyState extends State<ProductsBody> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    // Initial data fetch
-    // context.read<ProductsBloc>().add(ProductsRefreshed());
+    context.read<ProductsBloc>().add(ProductsRefreshed());
   }
 
   @override
@@ -81,7 +80,8 @@ class _ProductsBodyState extends State<ProductsBody> {
                     final product = state.products[index];
                     return Card(
                       elevation: 3,
-                      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 4.0),
                       clipBehavior: Clip.antiAlias,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
@@ -95,11 +95,14 @@ class _ProductsBodyState extends State<ProductsBody> {
                             child: Image.network(
                               product.thumbnail,
                               fit: BoxFit.cover,
-                              loadingBuilder: (context, child, progress) => progress == null
-                                  ? child
-                                  : const Center(child: CircularProgressIndicator()),
+                              loadingBuilder: (context, child, progress) =>
+                                  progress == null
+                                      ? child
+                                      : const Center(
+                                          child: CircularProgressIndicator()),
                               errorBuilder: (context, error, stackTrace) =>
-                                  const Icon(Icons.broken_image, size: 40, color: Colors.grey),
+                                  const Icon(Icons.broken_image,
+                                      size: 40, color: Colors.grey),
                             ),
                           ),
                           const SizedBox(width: 16),
@@ -121,7 +124,8 @@ class _ProductsBodyState extends State<ProductsBody> {
                                   const SizedBox(height: 8),
                                   Chip(
                                     label: Text(product.category.toUpperCase()),
-                                    backgroundColor: Colors.blue.withOpacity(0.1),
+                                    backgroundColor:
+                                        Colors.blue.withOpacity(0.1),
                                     labelStyle: const TextStyle(
                                       color: Colors.blue,
                                       fontSize: 10,
