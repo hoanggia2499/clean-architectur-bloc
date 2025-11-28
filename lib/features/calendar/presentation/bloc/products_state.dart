@@ -9,7 +9,14 @@ abstract class ProductsState extends Equatable {
 
 class ProductsInitial extends ProductsState {}
 
-class ProductsLoading extends ProductsState {}
+class ProductsFailure extends ProductsState {
+  final String message;
+
+  const ProductsFailure({required this.message});
+
+  @override
+  List<Object> get props => [message];
+}
 
 class ProductsSuccess extends ProductsState {
   final List<ProductEntity> products;
@@ -32,13 +39,4 @@ class ProductsSuccess extends ProductsState {
 
   @override
   List<Object> get props => [products, hasReachedMax];
-}
-
-class ProductsFailure extends ProductsState {
-  final String message;
-
-  const ProductsFailure({required this.message});
-
-  @override
-  List<Object> get props => [message];
 }

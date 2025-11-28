@@ -15,7 +15,7 @@ class AppScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: Text('Hello ConvexAppBar')),
+        appBar: AppBar(title: Text('Dummy JSON')),
         body: OrientationBuilder(
           builder: (context, orientation) {
             switch (orientation) {

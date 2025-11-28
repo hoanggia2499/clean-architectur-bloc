@@ -1,4 +1,5 @@
 import 'package:base_project/core/network/dio_client.dart';
+import 'package:base_project/core/network/path.dart';
 import 'package:base_project/features/calendar/data/models/product_list_model.dart';
 
 abstract class CalendarRemoteDataSource {
@@ -13,12 +14,12 @@ class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
   @override
   Future<ProductListModel> getProducts({required int limit, required int skip}) async {
     final response = await _dioClient.request(
-      'products',
+      PathURL.products,
       method: MethodType.GET,
       data: {
         'limit': limit,
         'skip': skip,
-        // 'select': 'title,price,thumbnail,category,description',
+        // 'select': 'title,description,category,category,price,discountPercentage,rating,stock',
       },
     );
     return ProductListModel.fromJson(response.data);
