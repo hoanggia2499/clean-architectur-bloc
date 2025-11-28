@@ -1,5 +1,6 @@
 import 'package:base_project/core/navigation/path.dart';
 import 'package:base_project/features/assessment/presentation/bloc/assessment_bloc.dart';
+import 'package:base_project/features/product_detail/presentation/page/product_detail_screen.dart';
 import 'package:base_project/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,21 +26,32 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-      path: PathRoute.dashboard,
-      name: 'dashboard',
-      builder: (BuildContext context, GoRouterState state) {
-        // Provide all necessary BLoCs for the screens within the dashboard here.
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(create: (_) => sl<DashBoardBloc>()),
-            BlocProvider(create: (_) => sl<TodoBloc>()),
-            BlocProvider(create: (_) => sl<ProductsBloc>()),
-            BlocProvider(create: (_) => sl<AssessmentBloc>()),
-          ],
-          child: const DashBoardScreen(),
-        );
-      },
-    ),
+        path: PathRoute.dashboard,
+        name: 'dashboard',
+        builder: (BuildContext context, GoRouterState state) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(create: (_) => sl<DashBoardBloc>()),
+              BlocProvider(create: (_) => sl<TodoBloc>()),
+              BlocProvider(create: (_) => sl<ProductsBloc>()),
+              BlocProvider(create: (_) => sl<AssessmentBloc>()),
+            ],
+            child: const DashBoardScreen(),
+          );
+        },
+        routes: [
+          GoRoute(
+            // The path uses a parameter to capture the product ID.
+            path: 'product/:id',
+            name: 'productDetail',
+            builder: (BuildContext context, GoRouterState state) {
+              // Extract the ID from the path parameters.
+              final productId =
+                  int.tryParse(state.pathParameters['id'] ?? '') ?? 0;
+              return ProductDetailScreen(productId: productId);
+            },
+          ),
+        ]),
   ],
   errorBuilder: (context, state) => Scaffold(
     body: Center(

@@ -7,12 +7,14 @@
       "name": "base_project",
       "version": "1.0.0+1",
       "dependencies": [
+        "bloc_concurrency",
         "cupertino_icons",
         "dartz",
         "dio",
         "equatable",
         "flutter",
         "flutter_bloc",
+        "flutter_easyloading",
         "flutter_secure_storage",
         "get_it",
         "go_router",
@@ -105,6 +107,22 @@
       ]
     },
     {
+      "name": "bloc_concurrency",
+      "version": "0.3.0",
+      "dependencies": [
+        "bloc",
+        "stream_transform"
+      ]
+    },
+    {
+      "name": "flutter_easyloading",
+      "version": "3.0.5",
+      "dependencies": [
+        "flutter",
+        "flutter_spinkit"
+      ]
+    },
+    {
       "name": "equatable",
       "version": "2.0.7",
       "dependencies": [
@@ -173,7 +191,7 @@
     },
     {
       "name": "flutter_bloc",
-      "version": "8.1.6",
+      "version": "9.1.1",
       "dependencies": [
         "bloc",
         "flutter",
@@ -559,6 +577,20 @@
       ]
     },
     {
+      "name": "bloc",
+      "version": "9.1.0",
+      "dependencies": [
+        "meta"
+      ]
+    },
+    {
+      "name": "flutter_spinkit",
+      "version": "5.2.2",
+      "dependencies": [
+        "flutter"
+      ]
+    },
+    {
       "name": "flutter_secure_storage_windows",
       "version": "3.1.2",
       "dependencies": [
@@ -629,22 +661,6 @@
       "version": "0.0.0",
       "dependencies": [
         "flutter"
-      ]
-    },
-    {
-      "name": "provider",
-      "version": "6.1.5+1",
-      "dependencies": [
-        "collection",
-        "flutter",
-        "nested"
-      ]
-    },
-    {
-      "name": "bloc",
-      "version": "8.1.4",
-      "dependencies": [
-        "meta"
       ]
     },
     {
@@ -811,13 +827,6 @@
       ]
     },
     {
-      "name": "nested",
-      "version": "1.0.0",
-      "dependencies": [
-        "flutter"
-      ]
-    },
-    {
       "name": "vm_service",
       "version": "15.0.2",
       "dependencies": []
@@ -879,6 +888,22 @@
       "dependencies": [
         "meta",
         "path"
+      ]
+    },
+    {
+      "name": "provider",
+      "version": "6.1.5+1",
+      "dependencies": [
+        "collection",
+        "flutter",
+        "nested"
+      ]
+    },
+    {
+      "name": "nested",
+      "version": "1.0.0",
+      "dependencies": [
+        "flutter"
       ]
     }
   ],

@@ -3,14 +3,14 @@ import 'package:base_project/core/network/path.dart';
 
 import '../models/product_list_model.dart';
 
-abstract class CalendarRemoteDataSource {
+abstract class ProductsRemoteDataSource {
   Future<ProductListModel> getProducts({required int limit, required int skip});
 }
 
-class CalendarRemoteDataSourceImpl implements CalendarRemoteDataSource {
+class ProductsRemoteDataSourceImpl implements ProductsRemoteDataSource {
   final DioClient _dioClient;
 
-  CalendarRemoteDataSourceImpl(this._dioClient);
+  ProductsRemoteDataSourceImpl(this._dioClient);
 
   @override
   Future<ProductListModel> getProducts({required int limit, required int skip}) async {

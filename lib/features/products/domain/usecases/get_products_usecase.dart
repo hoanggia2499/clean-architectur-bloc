@@ -18,7 +18,7 @@ class GetProductsParams extends Equatable {
 }
 
 class GetProductsUseCase implements UseCase<ProductListEntity, GetProductsParams> {
-  final CalendarRepository repository;
+  final ProductsRepository repository;
 
   GetProductsUseCase(this.repository);
 

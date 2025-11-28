@@ -6,10 +6,10 @@ import '../../domain/entities/product_list_entity.dart';
 import '../../domain/repositories/products_repository.dart';
 import '../datasources/products_remote_data_source.dart';
 
-class CalendarRepositoryImpl implements CalendarRepository {
-  final CalendarRemoteDataSource remoteDataSource;
+class ProductsRepositoryImpl implements ProductsRepository {
+  final ProductsRemoteDataSource remoteDataSource;
 
-  CalendarRepositoryImpl({required this.remoteDataSource});
+  ProductsRepositoryImpl({required this.remoteDataSource});
 
   @override
   Future<Either<Failure, ProductListEntity>> getProducts(

@@ -11,14 +11,14 @@ class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
   final TokenStorage tokenStorage;
 
-  AuthRepositoryImpl(
-      {required this.remoteDataSource, required this.tokenStorage});
+  AuthRepositoryImpl(this.remoteDataSource, this.tokenStorage);
 
   @override
   Future<Either<Failure, AuthResponseEntity>> login(
       String username, String password, int expiresInMins) async {
     try {
-      final authResponse = await remoteDataSource.login(username, password, expiresInMins);
+      final authResponse =
+          await remoteDataSource.login(username, password, expiresInMins);
       await tokenStorage.saveTokens(
         accessToken: authResponse.accessToken,
         refreshToken: authResponse.refreshToken,

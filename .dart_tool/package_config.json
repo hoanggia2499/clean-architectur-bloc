@@ -27,9 +27,15 @@
     },
     {
       "name": "bloc",
-      "rootUri": "file:///C:/Users/Baokun/AppData/Local/Pub/Cache/hosted/pub.dev/bloc-8.1.4",
+      "rootUri": "file:///C:/Users/Baokun/AppData/Local/Pub/Cache/hosted/pub.dev/bloc-9.1.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "bloc_concurrency",
+      "rootUri": "file:///C:/Users/Baokun/AppData/Local/Pub/Cache/hosted/pub.dev/bloc_concurrency-0.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
     },
     {
       "name": "boolean_selector",
@@ -183,7 +189,13 @@
     },
     {
       "name": "flutter_bloc",
-      "rootUri": "file:///C:/Users/Baokun/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_bloc-8.1.6",
+      "rootUri": "file:///C:/Users/Baokun/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_bloc-9.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
+      "name": "flutter_easyloading",
+      "rootUri": "file:///C:/Users/Baokun/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_easyloading-3.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -226,6 +238,12 @@
     {
       "name": "flutter_secure_storage_windows",
       "rootUri": "file:///C:/Users/Baokun/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_secure_storage_windows-3.1.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "flutter_spinkit",
+      "rootUri": "file:///C:/Users/Baokun/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_spinkit-5.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
