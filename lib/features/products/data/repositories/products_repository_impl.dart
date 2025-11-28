@@ -1,9 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:base_project/core/error.dart';
-import 'package:base_project/features/calendar/data/datasources/products_remote_data_source.dart';
-import 'package:base_project/features/calendar/domain/entities/product_list_entity.dart';
-import 'package:base_project/features/calendar/domain/repositories/products_repository.dart';
+
+import '../../domain/entities/product_list_entity.dart';
+import '../../domain/repositories/products_repository.dart';
+import '../datasources/products_remote_data_source.dart';
 
 class CalendarRepositoryImpl implements CalendarRepository {
   final CalendarRemoteDataSource remoteDataSource;

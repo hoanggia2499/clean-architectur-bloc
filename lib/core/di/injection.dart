@@ -1,8 +1,4 @@
 import 'package:base_project/features/assessment/presentation/bloc/assessment_bloc.dart';
-import 'package:base_project/features/calendar/data/datasources/products_remote_data_source.dart';
-import 'package:base_project/features/calendar/data/repositories/products_repository_impl.dart';
-import 'package:base_project/features/calendar/domain/repositories/products_repository.dart';
-import 'package:base_project/features/calendar/domain/usecases/get_products_usecase.dart';
 import 'package:base_project/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
@@ -19,8 +15,12 @@ import 'package:base_project/features/auth/domain/repositories/auth_repository.d
 import 'package:base_project/features/auth/domain/usecases/login_usecase.dart';
 
 import '../../features/auth/presentation/bloc/auth_bloc.dart';
-import '../../features/calendar/presentation/bloc/products_bloc.dart';
 import '../../features/dash_board/presentation/bloc/dash_board_bloc.dart';
+import '../../features/products/data/datasources/products_remote_data_source.dart';
+import '../../features/products/data/repositories/products_repository_impl.dart';
+import '../../features/products/domain/repositories/products_repository.dart';
+import '../../features/products/domain/usecases/get_products_usecase.dart';
+import '../../features/products/presentation/bloc/products_bloc.dart';
 
 final sl = GetIt.instance;
 

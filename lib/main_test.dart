@@ -11,5 +11,8 @@ import 'main_common.dart';
 void main() => runZonedGuarded(
       () async => await mainCommon(const AppProperties(
           apSrvURL: 'https://dummyjson.com', mode: AppMode.IT_TEST)),
-      (error, stack) => () {},
+      (error, stack) => () {
+        print("------runZonedGuarded--------"
+            "${error.toString()}");
+      },
     );

@@ -1,5 +1,5 @@
+import 'package:base_project/features/products/domain/entities/product_entity.dart';
 import 'package:equatable/equatable.dart';
-import 'package:base_project/features/calendar/domain/entities/product_entity.dart';
 
 class ProductListEntity extends Equatable {
   final List<ProductEntity> products;

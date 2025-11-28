@@ -2,8 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:base_project/core/error.dart';
 import 'package:base_project/core/usecase.dart';
-import 'package:base_project/features/calendar/domain/entities/product_list_entity.dart';
-import 'package:base_project/features/calendar/domain/repositories/products_repository.dart';
+
+import '../entities/product_list_entity.dart';
+import '../repositories/products_repository.dart';
 
 /// The parameters for fetching products, including pagination.
 class GetProductsParams extends Equatable {

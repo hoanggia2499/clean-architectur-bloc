@@ -1,6 +1,7 @@
 import 'package:base_project/core/network/dio_client.dart';
 import 'package:base_project/core/network/path.dart';
-import 'package:base_project/features/calendar/data/models/product_list_model.dart';
+
+import '../models/product_list_model.dart';
 
 abstract class CalendarRemoteDataSource {
   Future<ProductListModel> getProducts({required int limit, required int skip});

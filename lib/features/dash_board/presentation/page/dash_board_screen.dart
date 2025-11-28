@@ -1,12 +1,10 @@
-import 'package:base_project/features/assessment/presentation/bloc/assessment_bloc.dart';
-import 'package:base_project/features/calendar/presentation/bloc/products_bloc.dart';
-import 'package:base_project/features/todo/presentation/bloc/todo_bloc.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/widget/navigation_bar.dart';
 import '../../../assessment/presentation/page/assessment_screen.dart';
-import '../../../calendar/presentation/page/products_screen.dart';
+import '../../../products/presentation/page/products_screen.dart';
 import '../../../todo/presentation/page/todo_screen.dart';
 import '../bloc/dash_board_bloc.dart';
 

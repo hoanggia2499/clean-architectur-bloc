@@ -1,6 +1,5 @@
 import 'package:base_project/core/navigation/path.dart';
 import 'package:base_project/features/assessment/presentation/bloc/assessment_bloc.dart';
-import 'package:base_project/features/calendar/presentation/bloc/products_bloc.dart';
 import 'package:base_project/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +9,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../features/dash_board/presentation/bloc/dash_board_bloc.dart';
 import '../../features/dash_board/presentation/page/dash_board_screen.dart';
+import '../../features/products/presentation/bloc/products_bloc.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: PathRoute.dashboard,

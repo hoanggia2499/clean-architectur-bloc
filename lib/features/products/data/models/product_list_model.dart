@@ -1,5 +1,8 @@
-import 'package:base_project/features/calendar/data/models/product_model.dart';
-import 'package:base_project/features/calendar/domain/entities/product_list_entity.dart';
+
+
+import 'package:base_project/features/products/data/models/product_model.dart';
+
+import '../../domain/entities/product_list_entity.dart';
 
 class ProductListModel extends ProductListEntity {
   const ProductListModel({

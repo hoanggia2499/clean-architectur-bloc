@@ -1,4 +1,4 @@
-import 'package:base_project/features/calendar/presentation/page/widgets/products_body.dart';
+import 'package:base_project/features/products/presentation/page/widgets/products_body.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/widget/app_scaffold.dart';

@@ -1,14 +1,11 @@
 import 'dart:async';
-
-import 'package:base_project/core/usecase.dart';
-import 'package:base_project/features/calendar/domain/entities/product_list_entity.dart';
-import 'package:base_project/features/calendar/domain/usecases/get_products_usecase.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:bloc_concurrency/bloc_concurrency.dart';
 
 import '../../../../core/error.dart';
 import '../../domain/entities/product_entity.dart';
+import '../../domain/usecases/get_products_usecase.dart';
 part 'products_event.dart';
 part 'products_state.dart';
 

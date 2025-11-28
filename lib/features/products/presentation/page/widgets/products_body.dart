@@ -1,6 +1,7 @@
-import 'package:base_project/features/calendar/presentation/bloc/products_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../bloc/products_bloc.dart';
 
 class ProductsBody extends StatefulWidget {
   const ProductsBody({super.key});
