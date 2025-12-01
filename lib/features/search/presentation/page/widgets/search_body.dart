@@ -1,3 +1,5 @@
+import 'package:base_project/core/navigation/path.dart';
+import 'package:base_project/core/network/path.dart';
 import 'package:base_project/features/search/presentation/bloc/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,8 +60,8 @@ class SearchBody extends StatelessWidget {
                       title: Text(product.title),
                       subtitle: Text('\$${product.price}'),
                       onTap: () {
-                        final path = '/dashboard/${product.id}';
-                        context.go(path);
+                        context.go(PathURL.productDetail.replaceAll(
+                            PathRoute.productDetail, '${product.id}'));
                       },
                     );
                   },

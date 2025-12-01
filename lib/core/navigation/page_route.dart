@@ -1,5 +1,6 @@
 import 'package:base_project/core/navigation/error_page.dart';
 import 'package:base_project/core/navigation/path.dart';
+import 'package:base_project/core/network/path.dart';
 import 'package:base_project/features/assessment/presentation/bloc/assessment_bloc.dart';
 import 'package:base_project/features/product_detail/presentation/page/product_detail_screen.dart';
 import 'package:base_project/features/search/presentation/page/search_screen.dart';
@@ -28,7 +29,7 @@ final GoRouter router = GoRouter(
       },
     ),
     GoRoute(
-        path: PathRoute.dashboard,
+        path: PathRoute.products,
         name: 'dashboard',
         builder: (BuildContext context, GoRouterState state) {
           return MultiBlocProvider(

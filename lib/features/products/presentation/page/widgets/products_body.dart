@@ -1,4 +1,5 @@
 import 'package:base_project/core/navigation/path.dart';
+import 'package:base_project/core/network/path.dart';
 import 'package:base_project/features/products/presentation/bloc/products_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,8 +46,8 @@ class ProductsBody extends StatelessWidget {
                     final product = state.products[index];
                     return InkWell(
                       onTap: () {
-                        final path = '${PathRoute.dashboard}/${product.id}';
-                        context.go(path);
+                        context.go(PathURL.productDetail.replaceAll(
+                            PathRoute.productDetail, '${product.id}'));
                       },
                       child: Card(
                         elevation: 3,
@@ -135,7 +136,7 @@ class ProductsBody extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.search),
                     onPressed: () {
-                      context.go("${PathRoute.dashboard}/${PathRoute.search}"); // Navigate to search screen
+                      context.go(PathURL.search); // Navigate to search screen
                     },
                   ),
                   const Spacer(), // Use spacer to push sort button to the right

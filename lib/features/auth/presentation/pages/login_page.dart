@@ -1,4 +1,4 @@
-import 'package:base_project/core/navigation/path.dart';
+import 'package:base_project/core/network/path.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -31,7 +31,7 @@ class LoginPage extends StatelessWidget {
 
           if (state is AuthSuccess) {
             // Navigate to the car list screen and pass the list of cars.
-            context.go(PathRoute.dashboard);
+            context.go(PathURL.products);
           }
         },
         child: Padding(

@@ -1,4 +1,4 @@
-import 'package:base_project/core/navigation/path.dart';
+import 'package:base_project/core/network/path.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -34,7 +34,7 @@ class ErrorPage extends StatelessWidget {
                 label: const Text('Go to Dashboard'),
                 onPressed: () {
                   // Use context.go to reset the navigation stack to the dashboard.
-                  context.go(PathRoute.dashboard);
+                  context.go(PathURL.products);
                 },
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
