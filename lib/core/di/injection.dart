@@ -1,4 +1,6 @@
 import 'package:base_project/features/product_detail/presentation/bloc/product_detail_bloc.dart';
+import 'package:base_project/features/products/domain/usecases/search_products_usecase.dart';
+import 'package:base_project/features/search/presentation/bloc/search_bloc.dart';
 import 'package:base_project/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
@@ -36,13 +38,15 @@ void init() {
   sl.registerFactory(() => AuthBloc(sl()));
   sl.registerFactory(() => DashBoardBloc());
   sl.registerFactory(() => TodoBloc());
-  sl.registerFactory(() => ProductsBloc(sl()));
+  sl.registerFactory(() => ProductsBloc(sl())); // No longer needs SearchUseCase
   sl.registerFactory(() => AssessmentBloc());
   sl.registerFactory(() => ProductDetailBloc(sl()));
+  sl.registerFactory(() => SearchBloc(sl())); // Register SearchBloc
 
   // Use cases
   sl.registerLazySingleton(() => LoginUseCase(sl()));
   sl.registerLazySingleton(() => GetProductsUseCase(sl()));
+  sl.registerLazySingleton(() => SearchProductsUseCase(sl()));
   sl.registerLazySingleton(() => GetProductDetailUseCase(sl()));
 
   // Repositories

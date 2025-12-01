@@ -2,6 +2,7 @@ import 'package:base_project/core/navigation/error_page.dart';
 import 'package:base_project/core/navigation/path.dart';
 import 'package:base_project/features/assessment/presentation/bloc/assessment_bloc.dart';
 import 'package:base_project/features/product_detail/presentation/page/product_detail_screen.dart';
+import 'package:base_project/features/search/presentation/page/search_screen.dart';
 import 'package:base_project/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +15,7 @@ import '../../features/dash_board/presentation/page/dash_board_screen.dart';
 import '../../features/products/presentation/bloc/products_bloc.dart';
 
 final GoRouter router = GoRouter(
-  initialLocation: PathRoute.dashboard,
+  initialLocation: PathRoute.products,
   routes: <RouteBase>[
     GoRoute(
       path: PathRoute.login,
@@ -41,9 +42,16 @@ final GoRouter router = GoRouter(
           );
         },
         routes: [
+          // FIX: Put the more specific, static route before the parameterized one.
           GoRoute(
-            // The path uses a parameter to capture the product ID.
-            path: PathRoute.productDetail,
+            path: PathRoute.search,
+            name: 'productSearch',
+            builder: (BuildContext context, GoRouterState state) {
+              return const SearchScreen();
+            },
+          ),
+          GoRoute(
+            path: PathRoute.productDetail, // e.g., 'product/:id'
             name: 'productDetail',
             builder: (BuildContext context, GoRouterState state) {
               // Extract the ID from the path parameters.

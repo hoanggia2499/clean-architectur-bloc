@@ -23,4 +23,16 @@ class ProductsRepositoryImpl implements ProductsRepository {
       return Left(ServerFailure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, ProductListEntity>> searchProducts({required String query}) async {
+    try {
+      final productList = await remoteDataSource.searchProducts(query: query);
+      return Right(productList);
+    } on DioException catch (e) {
+      return Left(ServerFailure(e.message ?? 'An unexpected error occurred'));
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
 }

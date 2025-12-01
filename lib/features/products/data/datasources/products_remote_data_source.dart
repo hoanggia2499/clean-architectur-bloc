@@ -5,6 +5,8 @@ import 'package:base_project/features/products/data/models/product_list_model.da
 abstract class ProductsRemoteDataSource {
   Future<ProductListModel> getProducts(
       {required int limit, required int skip, String? sortBy, String? order});
+
+  Future<ProductListModel> searchProducts({required String query});
 }
 
 class ProductsRemoteDataSourceImpl implements ProductsRemoteDataSource {
@@ -15,7 +17,6 @@ class ProductsRemoteDataSourceImpl implements ProductsRemoteDataSource {
   @override
   Future<ProductListModel> getProducts(
       {required int limit, required int skip, String? sortBy, String? order}) async {
-
     final Map<String, dynamic> queryParameters = {
       'limit': limit,
       'skip': skip,
@@ -32,8 +33,17 @@ class ProductsRemoteDataSourceImpl implements ProductsRemoteDataSource {
     final response = await _dioClient.request(
       PathURL.products,
       method: MethodType.GET,
-      // Use `data` for GET method, as per our custom DioClient implementation.
-      data: queryParameters,
+      data: queryParameters, 
+    );
+    return ProductListModel.fromJson(response.data);
+  }
+
+  @override
+  Future<ProductListModel> searchProducts({required String query}) async {
+    final response = await _dioClient.request(
+      PathURL.search,
+      method: MethodType.GET,
+      data: {'q': query},
     );
     return ProductListModel.fromJson(response.data);
   }

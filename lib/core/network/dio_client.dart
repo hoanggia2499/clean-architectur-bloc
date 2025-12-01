@@ -11,7 +11,7 @@ class DioClient {
   DioClient(this._dio, AuthInterceptor authInterceptor) {
     _dio
       ..options.baseUrl = AppProperties
-          .instance.apSrvURL // TODO: Replace with your API base URL
+          .instance.apSrvURL
       ..options.headers = {'Content-Type': 'application/json'}
       ..options.connectTimeout = const Duration(milliseconds: 15000)
       ..options.receiveTimeout = const Duration(milliseconds: 15000);
@@ -30,8 +30,6 @@ class DioClient {
     }
   }
 
-  /// The main entry point for all requests. Returns a parsed model [T] on success
-  /// or throws an exception on failure, to be caught by the Repository layer.
   Future<Response> request(
     String path, {
     required MethodType method,
@@ -51,13 +49,10 @@ class DioClient {
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
-      // On success, parse and return the model directly.
       return response;
     } on DioException {
-      // Re-throw the exception to be handled by the calling layer (Repository).
       rethrow;
     } catch (e) {
-      // Re-throw any other exception (e.g., parsing error).
       rethrow;
     }
   }
@@ -73,32 +68,14 @@ class DioClient {
   }) {
     switch (method) {
       case MethodType.POST:
-        return _dio.post(path,
-            data: data, // Fixed: was using queryParameters here by mistake
-            options: options,
-            cancelToken: cancelToken,
-            onSendProgress: onSendProgress,
-            onReceiveProgress: onReceiveProgress);
+        return _dio.post(path, data: data, options: options, cancelToken: cancelToken, onSendProgress: onSendProgress, onReceiveProgress: onReceiveProgress);
       case MethodType.PUT:
-        return _dio.put(path,
-            data: data,
-            options: options,
-            cancelToken: cancelToken,
-            onSendProgress: onSendProgress,
-            onReceiveProgress: onReceiveProgress);
+        return _dio.put(path, data: data, options: options, cancelToken: cancelToken, onSendProgress: onSendProgress, onReceiveProgress: onReceiveProgress);
       case MethodType.DELETE:
-        return _dio.delete(path,
-            data: data,
-            queryParameters: data,
-            options: options,
-            cancelToken: cancelToken);
+        return _dio.delete(path, data: data, queryParameters: data, options: options, cancelToken: cancelToken);
       case MethodType.GET:
       default:
-        return _dio.get(path,
-            queryParameters: data,
-            options: options,
-            cancelToken: cancelToken,
-            onReceiveProgress: onReceiveProgress);
+        return _dio.get(path, queryParameters: data, options: options, cancelToken: cancelToken, onReceiveProgress: onReceiveProgress);
     }
   }
 }

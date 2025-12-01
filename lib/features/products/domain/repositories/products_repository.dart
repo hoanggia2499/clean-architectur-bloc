@@ -9,4 +9,6 @@ abstract class ProductsRepository {
     String? sortBy,
     String? order,
   });
+
+  Future<Either<Failure, ProductListEntity>> searchProducts({required String query});
 }

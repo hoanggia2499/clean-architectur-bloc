@@ -11,7 +11,6 @@ class ProductsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductsBloc, ProductsState>(
       builder: (context, state) {
-        // The main content is built based on the state
         Widget body;
         switch (state) {
           case ProductsInitial():
@@ -46,7 +45,8 @@ class ProductsBody extends StatelessWidget {
                     final product = state.products[index];
                     return InkWell(
                       onTap: () {
-                        context.go('${PathRoute.dashboard}/${product.id}');
+                        final path = '${PathRoute.dashboard}/${product.id}';
+                        context.go(path);
                       },
                       child: Card(
                         elevation: 3,
@@ -127,13 +127,19 @@ class ProductsBody extends StatelessWidget {
 
         return Column(
           children: [
-            if (state is ProductsSuccess)
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.search),
+                    onPressed: () {
+                      context.go("${PathRoute.dashboard}/${PathRoute.search}"); // Navigate to search screen
+                    },
+                  ),
+                  const Spacer(), // Use spacer to push sort button to the right
+                  if (state is ProductsSuccess)
                     PopupMenuButton<SortOrder>(
                       initialValue: state.sortOrder,
                       onSelected: (SortOrder result) {
@@ -170,9 +176,9 @@ class ProductsBody extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ],
-                ),
+                ],
               ),
+            ),
             Expanded(child: body),
           ],
         );

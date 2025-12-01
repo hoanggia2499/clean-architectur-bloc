@@ -62,9 +62,7 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       SortOrderChanged event, Emitter<ProductsState> emit) {
     if (state is ProductsSuccess) {
       final currentState = state as ProductsSuccess;
-      // Update the sort order in the state first
       emit(currentState.copyWith(sortOrder: event.sortOrder));
-      // Then trigger a refresh to fetch sorted data
       add(ProductsRefreshed());
     }
   }
@@ -93,12 +91,13 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     required int skip,
     bool isFetchingMore = false,
   }) async {
-    final currentSortOrder = state is ProductsSuccess ? (state as ProductsSuccess).sortOrder : SortOrder.none;
+    final currentSortOrder =
+        state is ProductsSuccess ? (state as ProductsSuccess).sortOrder : SortOrder.none;
 
     if (!isFetchingMore) {
       emit(ProductsInitial());
     }
-    
+
     String? sortBy, order;
     if (currentSortOrder != SortOrder.none) {
       sortBy = 'price';
@@ -124,15 +123,14 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
           emit(currentState.copyWith(
             products: currentState.products + newProducts,
             hasReachedMax: newProducts.isEmpty ||
-                (currentState.products.length + newProducts.length) >=
-                    productList.total,
+                (currentState.products.length + newProducts.length) >= productList.total,
           ));
         } else {
           emit(ProductsSuccess(
             products: newProducts,
             hasReachedMax: newProducts.isEmpty ||
                 newProducts.length >= productList.total,
-            sortOrder: currentSortOrder, // Preserve the sort order
+            sortOrder: currentSortOrder,
           ));
         }
       },
