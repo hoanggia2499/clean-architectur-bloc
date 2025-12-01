@@ -7,14 +7,11 @@ class AssessmentBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AssessmentBloc, AssessmentState>(
-      listener: (context, state) {},
-      child: BlocBuilder<AssessmentBloc, AssessmentState>(
-          builder: (context, state) {
-        return Center(
-          child: Text("ASSESSMENT"),
-        );
-      }),
-    );
+    return BlocBuilder<AssessmentBloc, AssessmentState>(
+        builder: (context, state) {
+      return Center(
+        child: Text("ASSESSMENT"),
+      );
+    });
   }
 }

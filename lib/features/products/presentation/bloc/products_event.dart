@@ -7,6 +7,9 @@ abstract class ProductsEvent extends Equatable {
   List<Object> get props => [];
 }
 
+///
+class ProductsInitialized extends ProductsEvent {}
+
 /// Fired when the page is first initialized or when a pull-to-refresh is performed.
 class ProductsRefreshed extends ProductsEvent {}
 

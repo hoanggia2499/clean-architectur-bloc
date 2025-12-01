@@ -14,6 +14,7 @@ class TodoBloc extends Bloc<TodoEvent, TodoState> {
       TodoPageInitialized event, Emitter<TodoState> emit) {
     // This is where you would typically fetch data for the todo list.
     // For now, we just print a message as requested.
+    print("AssessmentBloc");
    emit(TodoInitial());
     // You could emit a loading state here and then a loaded/error state.
   }

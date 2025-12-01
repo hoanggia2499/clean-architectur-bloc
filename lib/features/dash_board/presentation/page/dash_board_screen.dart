@@ -22,8 +22,7 @@ class DashBoardScreen extends StatelessWidget {
       providers: [
         BlocProvider(create: (_) => sl<DashBoardBloc>()),
         BlocProvider(create: (_) => sl<TodoBloc>()),
-        BlocProvider(
-            create: (_) => sl<ProductsBloc>()..add(ProductsRefreshed())),
+        BlocProvider(create: (_) => sl<ProductsBloc>()),
         BlocProvider(create: (_) => sl<AssessmentBloc>()),
       ],
       child: const DashBoardBody(),

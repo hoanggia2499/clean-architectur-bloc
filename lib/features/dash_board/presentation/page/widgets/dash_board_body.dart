@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/widget/navigation_bar.dart';
+import '../../../../assessment/presentation/bloc/assessment_bloc.dart';
 import '../../../../assessment/presentation/page/assessment_screen.dart';
+import '../../../../products/presentation/bloc/products_bloc.dart';
 import '../../../../products/presentation/page/products_screen.dart';
+import '../../../../todo/presentation/bloc/todo_bloc.dart';
 import '../../../../todo/presentation/page/todo_screen.dart';
 import '../../bloc/dash_board_bloc.dart';
 
@@ -22,7 +25,19 @@ class DashBoardBody extends StatelessWidget {
       // Only listen for changes when the tab index is different to avoid
       // re-triggering on other state changes.
       listenWhen: (previous, current) => previous.tabIndex != current.tabIndex,
-      listener: (context, state) {},
+      listener: (context, state) {
+        switch (state.tabIndex) {
+          case 0:
+            context.read<TodoBloc>().add(TodoPageInitialized());
+            break;
+          case 1:
+            context.read<ProductsBloc>().add(ProductsInitialized());
+            break;
+          case 2:
+            context.read<AssessmentBloc>().add(AssessmentPageInitialized());
+            break;
+        }
+      },
       // The BlocBuilder remains the single source of truth for the UI.
       child: BlocBuilder<DashBoardBloc, DashBoardState>(
         builder: (context, state) {

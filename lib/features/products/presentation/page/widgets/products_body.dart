@@ -1,45 +1,12 @@
+import 'package:base_project/core/navigation/path.dart';
+import 'package:base_project/core/network/path.dart';
 import 'package:base_project/features/products/presentation/bloc/products_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class ProductsBody extends StatefulWidget {
+class ProductsBody extends StatelessWidget {
   const ProductsBody({super.key});
-
-  @override
-  State<ProductsBody> createState() => _ProductsBodyState();
-}
-
-class _ProductsBodyState extends State<ProductsBody> {
-  final _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    super.initState();
-    _scrollController.addListener(_onScroll);
-    // context.read<ProductsBloc>().add(ProductsRefreshed());
-  }
-
-  @override
-  void dispose() {
-    _scrollController
-      ..removeListener(_onScroll)
-      ..dispose();
-    super.dispose();
-  }
-
-  void _onScroll() {
-    if (_isBottom) {
-      context.read<ProductsBloc>().add(ProductsFetched());
-    }
-  }
-
-  bool get _isBottom {
-    if (!_scrollController.hasClients) return false;
-    final maxScroll = _scrollController.position.maxScrollExtent;
-    final currentScroll = _scrollController.offset;
-    return currentScroll >= (maxScroll * 0.9);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +34,8 @@ class _ProductsBodyState extends State<ProductsBody> {
               },
               child: ListView.builder(
                 physics: const AlwaysScrollableScrollPhysics(),
-                controller: _scrollController,
+                // Get the scroll controller directly from the BLoC.
+                controller: context.read<ProductsBloc>().scrollController,
                 itemCount: state.hasReachedMax
                     ? state.products.length
                     : state.products.length + 1,
@@ -78,12 +46,12 @@ class _ProductsBodyState extends State<ProductsBody> {
                   final product = state.products[index];
                   return InkWell(
                     onTap: () {
-                      // Navigate to the product detail page with the product's ID.
-                      context.go('/product/${product.id}');
+                      context.go('${PathRoute.dashboard}/${product.id}');
                     },
                     child: Card(
                       elevation: 3,
-                      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 4.0),
                       clipBehavior: Clip.antiAlias,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12.0),
@@ -97,11 +65,14 @@ class _ProductsBodyState extends State<ProductsBody> {
                             child: Image.network(
                               product.thumbnail,
                               fit: BoxFit.cover,
-                              loadingBuilder: (context, child, progress) => progress == null
-                                  ? child
-                                  : const Center(child: CircularProgressIndicator()),
+                              loadingBuilder: (context, child, progress) =>
+                                  progress == null
+                                      ? child
+                                      : const Center(
+                                          child: CircularProgressIndicator()),
                               errorBuilder: (context, error, stackTrace) =>
-                                  const Icon(Icons.broken_image, size: 40, color: Colors.grey),
+                                  const Icon(Icons.broken_image,
+                                      size: 40, color: Colors.grey),
                             ),
                           ),
                           const SizedBox(width: 16),
@@ -123,7 +94,8 @@ class _ProductsBodyState extends State<ProductsBody> {
                                   const SizedBox(height: 8),
                                   Chip(
                                     label: Text(product.category.toUpperCase()),
-                                    backgroundColor: Colors.blue.withOpacity(0.1),
+                                    backgroundColor:
+                                        Colors.blue.withOpacity(0.1),
                                     labelStyle: const TextStyle(
                                       color: Colors.blue,
                                       fontSize: 10,
@@ -153,7 +125,8 @@ class _ProductsBodyState extends State<ProductsBody> {
             );
 
           default:
-            return const Center(child: CircularProgressIndicator());
+            // Should not happen, but as a fallback.
+            return const Center(child: Text('Unhandled state'));
         }
       },
     );

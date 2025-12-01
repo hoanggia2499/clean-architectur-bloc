@@ -31,7 +31,7 @@ final GoRouter router = GoRouter(
         routes: [
           GoRoute(
             // The path uses a parameter to capture the product ID.
-            path: 'product/:id',
+            path: PathRoute.productDetail,
             name: 'productDetail',
             builder: (BuildContext context, GoRouterState state) {
               // Extract the ID from the path parameters.
