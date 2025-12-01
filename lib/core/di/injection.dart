@@ -1,5 +1,8 @@
 import 'package:base_project/features/product_detail/presentation/bloc/product_detail_bloc.dart';
 import 'package:base_project/features/products/domain/usecases/search_products_usecase.dart';
+import 'package:base_project/features/search/domain/repositories/search_history_repository.dart';
+import 'package:base_project/features/search/domain/usecases/add_search_term_usecase.dart';
+import 'package:base_project/features/search/domain/usecases/get_search_history_usecase.dart';
 import 'package:base_project/features/search/presentation/bloc/search_bloc.dart';
 import 'package:base_project/features/todo/presentation/bloc/todo_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -30,6 +33,7 @@ import 'package:base_project/features/product_detail/domain/usecases/get_product
 
 import '../../features/assessment/presentation/bloc/assessment_bloc.dart';
 import '../../features/dash_board/presentation/bloc/dash_board_bloc.dart';
+import '../../features/search/data/repositories/search_history_repository_impl.dart';
 
 final sl = GetIt.instance;
 
@@ -38,16 +42,18 @@ void init() {
   sl.registerFactory(() => AuthBloc(sl()));
   sl.registerFactory(() => DashBoardBloc());
   sl.registerFactory(() => TodoBloc());
-  sl.registerFactory(() => ProductsBloc(sl())); // No longer needs SearchUseCase
+  sl.registerFactory(() => ProductsBloc(sl()));
   sl.registerFactory(() => AssessmentBloc());
   sl.registerFactory(() => ProductDetailBloc(sl()));
-  sl.registerFactory(() => SearchBloc(sl())); // Register SearchBloc
+  sl.registerFactory(() => SearchBloc(sl(), sl(), sl())); // Inject new UseCases
 
   // Use cases
   sl.registerLazySingleton(() => LoginUseCase(sl()));
   sl.registerLazySingleton(() => GetProductsUseCase(sl()));
   sl.registerLazySingleton(() => SearchProductsUseCase(sl()));
   sl.registerLazySingleton(() => GetProductDetailUseCase(sl()));
+  sl.registerLazySingleton(() => GetSearchHistoryUseCase(sl()));
+  sl.registerLazySingleton(() => AddSearchTermUseCase(sl()));
 
   // Repositories
   sl.registerLazySingleton<AuthRepository>(
@@ -59,6 +65,8 @@ void init() {
   sl.registerLazySingleton<ProductDetailRepository>(
     () => ProductDetailRepositoryImpl(sl()),
   );
+  sl.registerLazySingleton<SearchHistoryRepository>(
+      () => SearchHistoryRepositoryImpl(sl()));
 
   // Data sources
   sl.registerLazySingleton<AuthRemoteDataSource>(

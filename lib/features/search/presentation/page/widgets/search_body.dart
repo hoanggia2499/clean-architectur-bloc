@@ -1,5 +1,4 @@
-import 'package:base_project/core/navigation/path.dart';
-import 'package:base_project/core/network/path.dart';
+import 'package:base_project/features/search/domain/entities/search_term_entity.dart';
 import 'package:base_project/features/search/presentation/bloc/search_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +9,8 @@ class SearchBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final searchBloc = context.read<SearchBloc>();
+
     return Column(
       children: [
         Padding(
@@ -17,7 +18,7 @@ class SearchBody extends StatelessWidget {
           child: TextField(
             autofocus: true,
             onChanged: (query) {
-              context.read<SearchBloc>().add(SearchQueryChanged(query));
+              searchBloc.add(SearchQueryChanged(query));
             },
             decoration: InputDecoration(
               labelText: 'Search Products',
@@ -31,11 +32,6 @@ class SearchBody extends StatelessWidget {
         Expanded(
           child: BlocBuilder<SearchBloc, SearchState>(
             builder: (context, state) {
-              if (state is SearchInitial) {
-                return const Center(
-                  child: Text('Type something to start searching.'),
-                );
-              }
               if (state is SearchLoading) {
                 return const Center(child: CircularProgressIndicator());
               }
@@ -60,18 +56,60 @@ class SearchBody extends StatelessWidget {
                       title: Text(product.title),
                       subtitle: Text('\$${product.price}'),
                       onTap: () {
-                        context.go(PathURL.productDetail.replaceAll(
-                            PathRoute.productDetail, '${product.id}'));
+                        // Save the search term before navigating.
+                        searchBloc.add(SaveSearchTerm(state.currentQuery));
+                        final path = '/dashboard/product/${product.id}';
+                        context.go(path);
                       },
                     );
                   },
                 );
+              }
+              if (state is SearchInitial) {
+                if (state.historyTerms.isEmpty) {
+                  return const Center(
+                    child: Text('Type something to start searching.'),
+                  );
+                }
+                return _buildSearchHistory(context, state.historyTerms);
               }
               return const SizedBox.shrink();
             },
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildSearchHistory(BuildContext context, List<SearchTermEntity> history) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Recent Searches',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 8.0,
+            runSpacing: 8.0,
+            children: history.map((term) {
+              return InkWell(
+                onTap: () {
+                  // Trigger a search with the tapped history term.
+                  context.read<SearchBloc>().add(SearchQueryChanged(term.query));
+                },
+                child: Chip(
+                  label: Text(term.query),
+                  backgroundColor: Colors.grey[200],
+                ),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
     );
   }
 }
