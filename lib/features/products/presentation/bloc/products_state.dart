@@ -1,5 +1,7 @@
 part of 'products_bloc.dart';
 
+enum SortOrder { none, asc, desc }
+
 abstract class ProductsState extends Equatable {
   const ProductsState();
 
@@ -21,22 +23,26 @@ class ProductsFailure extends ProductsState {
 class ProductsSuccess extends ProductsState {
   final List<ProductEntity> products;
   final bool hasReachedMax;
+  final SortOrder sortOrder;
 
   const ProductsSuccess({
     this.products = const [],
     this.hasReachedMax = false,
+    this.sortOrder = SortOrder.none,
   });
 
   ProductsSuccess copyWith({
     List<ProductEntity>? products,
     bool? hasReachedMax,
+    SortOrder? sortOrder,
   }) {
     return ProductsSuccess(
       products: products ?? this.products,
       hasReachedMax: hasReachedMax ?? this.hasReachedMax,
+      sortOrder: sortOrder ?? this.sortOrder,
     );
   }
 
   @override
-  List<Object> get props => [products, hasReachedMax];
+  List<Object> get props => [products, hasReachedMax, sortOrder];
 }

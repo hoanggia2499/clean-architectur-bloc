@@ -7,11 +7,15 @@ abstract class ProductsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-///
-class ProductsInitialized extends ProductsEvent {}
-
-/// Fired when the page is first initialized or when a pull-to-refresh is performed.
 class ProductsRefreshed extends ProductsEvent {}
 
-/// Fired when the user scrolls to the bottom of the list to load more products.
 class ProductsFetched extends ProductsEvent {}
+
+class SortOrderChanged extends ProductsEvent {
+  final SortOrder sortOrder;
+
+  const SortOrderChanged(this.sortOrder);
+
+  @override
+  List<Object> get props => [sortOrder];
+}

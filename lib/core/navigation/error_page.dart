@@ -2,9 +2,9 @@ import 'package:base_project/core/navigation/path.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class ErrorScreen extends StatelessWidget {
+class ErrorPage extends StatelessWidget {
   final GoRouterState state;
-  const ErrorScreen({super.key, required this.state});
+  const ErrorPage({super.key, required this.state});
 
   @override
   Widget build(BuildContext context) {

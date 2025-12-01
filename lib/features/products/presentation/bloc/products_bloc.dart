@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:base_project/core/usecase.dart';
 import 'package:base_project/features/products/domain/usecases/get_products_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,11 +17,9 @@ const _productLimit = 10;
 class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
   final GetProductsUseCase getProductsUseCase;
 
-  // 1. Khai báo ScrollController
   late final ScrollController _scrollController;
 
   ProductsBloc(this.getProductsUseCase) : super(ProductsInitial()) {
-    // 2. Khởi tạo và gắn Listener trong constructor
     _scrollController = ScrollController()..addListener(_onScroll);
 
     on<ProductsRefreshed>(
@@ -31,19 +30,16 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
       _onProductsFetched,
       transformer: droppable(),
     );
-
-    on<ProductsInitialized>(
-      _onProductsInitialized,
+    on<SortOrderChanged>(
+      _onSortOrderChanged,
+      transformer: restartable(),
     );
 
-    // Tự động tải dữ liệu lần đầu khi BLoC được tạo
     add(ProductsRefreshed());
   }
 
-  // Getter để UI có thể truy cập Controller
   ScrollController get scrollController => _scrollController;
 
-  // 3. Hàm xử lý logic scroll
   void _onScroll() {
     if (_isBottom) add(ProductsFetched());
   }
@@ -55,7 +51,6 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     return currentScroll >= (maxScroll * 0.9);
   }
 
-  // 4. Override close() để dọn dẹp tài nguyên
   @override
   Future<void> close() {
     _scrollController.removeListener(_onScroll);
@@ -63,9 +58,19 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     return super.close();
   }
 
+  FutureOr<void> _onSortOrderChanged(
+      SortOrderChanged event, Emitter<ProductsState> emit) {
+    if (state is ProductsSuccess) {
+      final currentState = state as ProductsSuccess;
+      // Update the sort order in the state first
+      emit(currentState.copyWith(sortOrder: event.sortOrder));
+      // Then trigger a refresh to fetch sorted data
+      add(ProductsRefreshed());
+    }
+  }
+
   FutureOr<void> _onProductsRefreshed(
       ProductsRefreshed event, Emitter<ProductsState> emit) async {
-    // Không cần emit ProductsInitial() nữa vì sẽ gây ra một frame loading thừa
     await _fetchAndEmitProducts(emit: emit, skip: 0);
   }
 
@@ -88,13 +93,20 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
     required int skip,
     bool isFetchingMore = false,
   }) async {
-    // Nếu đây là lần tải đầu (không phải load more), emit state loading
+    final currentSortOrder = state is ProductsSuccess ? (state as ProductsSuccess).sortOrder : SortOrder.none;
+
     if (!isFetchingMore) {
       emit(ProductsInitial());
     }
+    
+    String? sortBy, order;
+    if (currentSortOrder != SortOrder.none) {
+      sortBy = 'price';
+      order = currentSortOrder == SortOrder.asc ? 'asc' : 'desc';
+    }
 
-    final result = await getProductsUseCase
-        .call(GetProductsParams(limit: _productLimit, skip: skip));
+    final result = await getProductsUseCase.call(
+        GetProductsParams(limit: _productLimit, skip: skip, sortBy: sortBy, order: order));
 
     result.fold(
       (failure) {
@@ -118,17 +130,12 @@ class ProductsBloc extends Bloc<ProductsEvent, ProductsState> {
         } else {
           emit(ProductsSuccess(
             products: newProducts,
-            hasReachedMax:
-                newProducts.isEmpty || newProducts.length >= productList.total,
+            hasReachedMax: newProducts.isEmpty ||
+                newProducts.length >= productList.total,
+            sortOrder: currentSortOrder, // Preserve the sort order
           ));
         }
       },
     );
-  }
-
-  FutureOr<void> _onProductsInitialized(
-      ProductsInitialized event, Emitter<ProductsState> emit) {
-    ///TODO: Additional feat: condition to refresh page
-    add(ProductsRefreshed());
   }
 }

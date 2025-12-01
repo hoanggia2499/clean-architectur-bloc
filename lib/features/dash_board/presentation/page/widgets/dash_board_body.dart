@@ -31,7 +31,7 @@ class DashBoardBody extends StatelessWidget {
             context.read<TodoBloc>().add(TodoPageInitialized());
             break;
           case 1:
-            context.read<ProductsBloc>().add(ProductsInitialized());
+            // context.read<ProductsBloc>().add(ProductsInitialized());
             break;
           case 2:
             context.read<AssessmentBloc>().add(AssessmentPageInitialized());
