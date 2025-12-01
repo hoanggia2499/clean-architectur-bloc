@@ -17,7 +17,7 @@ class _ProductsBodyState extends State<ProductsBody> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
-    context.read<ProductsBloc>().add(ProductsRefreshed());
+    // context.read<ProductsBloc>().add(ProductsRefreshed());
   }
 
   @override
