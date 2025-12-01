@@ -9,7 +9,7 @@ import '../datasources/products_remote_data_source.dart';
 class ProductsRepositoryImpl implements ProductsRepository {
   final ProductsRemoteDataSource remoteDataSource;
 
-  ProductsRepositoryImpl({required this.remoteDataSource});
+  ProductsRepositoryImpl( this.remoteDataSource);
 
   @override
   Future<Either<Failure, ProductListEntity>> getProducts(

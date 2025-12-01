@@ -18,7 +18,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   FutureOr<void> _onGetProductDetail(
       GetProductDetail event, Emitter<ProductDetailState> emit) async {
     emit(ProductDetailLoading());
-    final result = await getProductDetailUseCase(
+    final result = await getProductDetailUseCase.call(
         GetProductDetailParams(productId: event.productId));
 
     result.fold((failure) {

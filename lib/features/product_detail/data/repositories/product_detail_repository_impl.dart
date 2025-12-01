@@ -8,7 +8,7 @@ import 'package:base_project/features/product_detail/domain/repositories/product
 class ProductDetailRepositoryImpl implements ProductDetailRepository {
   final ProductDetailRemoteDataSource remoteDataSource;
 
-  ProductDetailRepositoryImpl({required this.remoteDataSource});
+  ProductDetailRepositoryImpl(this.remoteDataSource);
 
   @override
   Future<Either<Failure, ProductDetailEntity>> getProductDetail(int productId) async {

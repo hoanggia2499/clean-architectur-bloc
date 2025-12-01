@@ -50,10 +50,10 @@ void init() {
     () => AuthRepositoryImpl(sl(), sl()),
   );
   sl.registerLazySingleton<ProductsRepository>(
-    () => ProductsRepositoryImpl(remoteDataSource: sl()),
+    () => ProductsRepositoryImpl(sl()),
   );
   sl.registerLazySingleton<ProductDetailRepository>(
-    () => ProductDetailRepositoryImpl(remoteDataSource: sl()),
+    () => ProductDetailRepositoryImpl(sl()),
   );
 
   // Data sources

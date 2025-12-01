@@ -9,7 +9,7 @@ import 'widgets/product_detail_body.dart';
 class ProductDetailScreen extends StatelessWidget {
   final int productId;
 
-  const ProductDetailScreen({Key? key, required this.productId}) : super(key: key);
+  const ProductDetailScreen({super.key, required this.productId});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ProductDetailScreen extends StatelessWidget {
       child: const AppScaffold(
         bodyPortrait: ProductDetailBody(),
         // You can create a specific landscape layout if needed
-        bodyLandScape: ProductDetailBody(), 
+        bodyLandScape: ProductDetailBody(),
       ),
     );
   }

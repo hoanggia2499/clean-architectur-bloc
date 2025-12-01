@@ -11,6 +11,7 @@ import '../../features/auth/presentation/bloc/auth_bloc.dart';
 import '../../features/dash_board/presentation/bloc/dash_board_bloc.dart';
 import '../../features/dash_board/presentation/page/dash_board_screen.dart';
 import '../../features/products/presentation/bloc/products_bloc.dart';
+import 'error_page.dart';
 
 final GoRouter router = GoRouter(
   initialLocation: PathRoute.dashboard,
@@ -53,9 +54,7 @@ final GoRouter router = GoRouter(
           ),
         ]),
   ],
-  errorBuilder: (context, state) => Scaffold(
-    body: Center(
-      child: Text('Page not found: ${state.uri.path}'),
-    ),
+  errorBuilder: (context, state) => ErrorScreen(
+    state: state,
   ),
 );
