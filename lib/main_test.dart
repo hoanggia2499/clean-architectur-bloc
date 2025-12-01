@@ -6,7 +6,7 @@
 import 'dart:async';
 
 import 'core/config/app_properties.dart';
-import 'main_common.dart';
+import 'main.dart';
 
 void main() => runZonedGuarded(
       () async => await mainCommon(const AppProperties(
