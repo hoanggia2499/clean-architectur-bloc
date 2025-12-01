@@ -18,21 +18,28 @@ class ProductDetailModel extends ProductDetailEntity {
   });
 
   factory ProductDetailModel.fromJson(Map<String, dynamic> json) {
+    final imagesList = json['images'] as List?;
+    final reviewsList = json['reviews'] as List?;
+
     return ProductDetailModel(
-      id: json['id'] as int,
-      title: json['title'] as String,
-      description: json['description'] as String,
-      price: (json['price'] as num).toDouble(),
-      discountPercentage: (json['discountPercentage'] as num).toDouble(),
-      rating: (json['rating'] as num).toDouble(),
-      stock: json['stock'] as int,
-      brand: json['brand'] as String,
-      category: json['category'] as String,
-      thumbnail: json['thumbnail'] as String,
-      images: List<String>.from(json['images'] as List),
-      reviews: (json['reviews'] as List)
-          .map((reviewJson) => ReviewModel.fromJson(reviewJson as Map<String, dynamic>))
-          .toList(),
+      // Provide default values for all potentially null fields.
+      id: json['id'] as int? ?? 0,
+      title: json['title'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      price: (json['price'] as num? ?? 0).toDouble(),
+      discountPercentage:
+          (json['discountPercentage'] as num? ?? 0).toDouble(),
+      rating: (json['rating'] as num? ?? 0).toDouble(),
+      stock: json['stock'] as int? ?? 0,
+      brand: json['brand'] as String? ?? 'Unknown Brand',
+      category: json['category'] as String? ?? '',
+      thumbnail: json['thumbnail'] as String? ?? '',
+      images: imagesList?.map((e) => e.toString()).toList() ?? [],
+      reviews: reviewsList
+              ?.map((reviewJson) =>
+                  ReviewModel.fromJson(reviewJson as Map<String, dynamic>))
+              .toList() ??
+          [],
     );
   }
 }
